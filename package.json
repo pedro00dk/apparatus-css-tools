@@ -1,0 +1,40 @@
+{
+    "name": "@_apparatus_/css-tools",
+    "description": "A small set of tools to deal with different aspects of CSS.",
+    "version": "0.0.0",
+    "type": "module",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/pedro00dk/apparatus-css-tools"
+    },
+    "author": {
+        "name": "Pedro Henrique",
+        "email": "pedro00dk@gmail.com"
+    },
+    "keywords": [
+        "css",
+        "class",
+        "classes",
+        "classname",
+        "classnames",
+        "clsx",
+        "util"
+    ],
+    "types": "dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        }
+    },
+    "scripts": {
+        "build": "vite build && tsc",
+        "test": "node --test ./**/*.test.*"
+    },
+    "devDependencies": {
+        "@types/node": "24.0.15",
+        "typescript": "5.8.3",
+        "vite": "7.0.5"
+    }
+}
