@@ -10,25 +10,40 @@ A small set of tools to deal with different aspects of CSS.
 npm install @_apparatus_/css-tools
 ```
 
+## Features
+
+-   🎨 **Combine classes** - Flexible way to join multiple class names
+-   📦 **Tiny bundle** - Minimal footprint with no dependencies
+
 ## Examples
 
-### Combine classes
-
-```typescript
+```ts
 import { cx } from '@_apparatus_/css-tools'
 
-// join classes
+// Simple class joining
 cx('foo', 'bar') // => 'foo bar'
 
-// filter non-string values
-cx('foo', undefined, null, false, true, 0, 1, 2n, 'bar') // => 'foo        bar'
+// Filter non-string values
+cx('foo', undefined, null, false, 'bar') // => 'foo bar'
+cx('foo', true, 'bar') // => 'foo bar'
+cx('foo', 0, 1, 2n, 'bar') // => 'foo bar'
 
-// handle arrays
-cx(['foo', ['bar', ['baz']]]) // => 'foo bar baz'
+// Using logical operators
+const isActive = true
+const isDisabled = false
+const hasError = true
+cx('button', isActive && 'active', isDisabled && 'disabled') // => 'button active'
+cx('input', hasError ? 'error' : 'no-error') // => 'input error'
 
-// handle objects
-cx({ foo: true, bar: false, baz: 1 }) // => 'foo baz'
+// Array flattening
+cx(['foo', 'bar', 'baz']) // => 'foo bar baz'
+cx('foo', ['bar', ['baz', 'qux']]) // => 'foo bar baz qux'
+cx(...['foo', false, 'bar', undefined, 'baz']) // => 'foo bar baz'
 
-// mix and match
-cx(false && 'foo', ['bar', { baz: true, qux: 0 }]) // => ' bar baz'
+// Object handling
+cx({ foo: true, bar: false, baz: true }) // => 'foo baz'
+cx({ foo: 1, bar: 0, baz: 'yes' }) // => 'foo baz'
+
+// Combining objects with strings
+cx('base', { active: true, disabled: false }) // => 'base active'
 ```
